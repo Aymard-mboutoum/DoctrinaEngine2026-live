@@ -1,54 +1,44 @@
 package AmazingFootprint;
 
 import Engine.Canvas;
+import Engine.MovableActor;
 import Engine.MovementController;
 
 import java.awt.*;
 
-public class Player {
+public class Player extends MovableActor {
     private MovementController controller;
-    private int positionX;
-    private int positionY;
-    private int speed;
     private final int maxWidth;
     private final int maxHeight;
-    private final int height = 60;
-    private final int width = 20;
 
     public Player(MovementController controller, int width, int height) {
         this.controller = controller;
-        positionX = 200;
-        positionY = 200;
-        speed = 3;
+        moveTo(200, 200);
+        setDimensions(20, 60);
+        setSpeed(3);
         maxHeight = height;
         maxWidth = width;
     }
 
+    @Override
     public void update() {
         if (controller.isUpPressed()) {
-            if (positionY >= 0) {
-                positionY -= speed;
-            }
+            moveUp(0);
         } else if (controller.isDownPressed()) {
-            if (positionY <= maxHeight-height) {
-                positionY += speed;
-            }
+            moveDown(maxHeight);
         } else if (controller.isLeftPressed()) {
-            if (positionX >= 0) {
-                positionX -= speed;
-            }
+            moveLeft(0);
         } else if (controller.isRightPressed()) {
-            if (positionX <= maxWidth-width) {
-                positionX += speed;
-            }
+            moveRight(maxWidth);
         }
     }
 
     public Footprint layFootprint() {
-        return new Footprint(positionX, positionY);
+        return new Footprint(x, y);
     }
 
+    @Override
     public void draw(Canvas canvas) {
-        canvas.drawRectangle(positionX, positionY, width, height, Color.WHITE);
+        canvas.drawRectangle(this, Color.WHITE);
     }
 }
