@@ -1,28 +1,24 @@
 package AmazingFootprint;
 
 import Engine.Canvas;
+import Engine.StaticActor;
 
 import java.awt.*;
 import java.util.Random;
 
-public class Footprint {
-    private int x;
-    private int y;
-    private final int width;
-    private final int height;
+public class Footprint extends StaticActor {
+    private final int dimension = 5;
 
     public Footprint(int x, int y) {
-        this.x = x;
-        this.y = y;
-        width = 5;
-        height = 5;
-
+        moveTo(x, y);
+        setDimensions(dimension, dimension);
     }
 
     private int getRandomValue() {
         return new Random().nextInt(256);
     }
 
+    @Override
     public void draw(Canvas canvas) {
         Color color = new Color(getRandomValue(),
                 getRandomValue(), getRandomValue());
