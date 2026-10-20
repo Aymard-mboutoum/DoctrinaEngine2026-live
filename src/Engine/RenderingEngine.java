@@ -38,6 +38,7 @@ public class RenderingEngine {
         mainFrame.setResizable(false);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setState(JFrame.NORMAL);
+        mainFrame.setUndecorated(true);
     }
 
     public void start() {
@@ -76,5 +77,9 @@ public class RenderingEngine {
         graphics.dispose();
     }
 
+    public void stop() {
+        mainFrame.setVisible(false);
+        mainFrame.dispose();
+    }
 
 }

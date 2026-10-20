@@ -31,6 +31,11 @@ public abstract class Game {
             engine.drawOnScreen();
             gameTime.synchronize();
         }
+        engine.stop();
+    }
+
+    public void stop() {
+        playing = false;
     }
 
     public void addKeyListener(KeyListener keyListener) {

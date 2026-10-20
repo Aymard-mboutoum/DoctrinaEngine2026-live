@@ -1,20 +1,18 @@
 package MovingRectangle;
 
+import Engine.*;
 import Engine.Canvas;
-import Engine.Controller;
-import Engine.Game;
-import Engine.MovementController;
 
 import java.awt.*;
 
 public class MovingRectangleGame extends Game {
-    private MovementController controller;
+    private GamePad controller;
     Player player;
     Npc npc;
 
     @Override
     public void initialize() {
-        controller = new MovementController();
+        controller = new GamePad();
         controller.useWASD();
         addKeyListener(controller);
         player = new Player(controller, getWidth(), getHeight());
@@ -23,6 +21,9 @@ public class MovingRectangleGame extends Game {
 
     @Override
     public void update() {
+        if (controller.isQuitPressed()) {
+            stop();
+        }
         player.update();
         npc.update();
     }
