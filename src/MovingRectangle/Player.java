@@ -2,11 +2,13 @@ package MovingRectangle;
 
 import Engine.Canvas;
 import Engine.Controller;
+import Engine.MovementController;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class Player {
-    private Controller controller;
+    private MovementController controller;
     private int positionX;
     private int positionY;
     private int speed;
@@ -15,7 +17,7 @@ public class Player {
     private final int height = 60;
     private final int width = 20;
 
-    public Player(Controller controller, int width, int height) {
+    public Player(MovementController controller, int width, int height) {
         this.controller = controller;
         positionX = 200;
         positionY = 200;

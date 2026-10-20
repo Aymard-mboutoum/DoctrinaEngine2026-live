@@ -2,27 +2,13 @@ package Engine;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.HashMap;
 
 public class Controller implements KeyListener {
-    private boolean upPressed;
-    private boolean downPressed;
-    private boolean leftPressed;
-    private boolean rightPressed;
+    private HashMap<Integer, Boolean> pressedKeys = new HashMap<>();
 
-    public boolean isUpPressed() {
-        return upPressed;
-    }
-
-    public boolean isDownPressed() {
-        return downPressed;
-    }
-
-    public boolean isLeftPressed() {
-        return leftPressed;
-    }
-
-    public boolean isRightPressed() {
-        return rightPressed;
+    public void bindKey(int keyCode) {
+        pressedKeys.put(keyCode, false);
     }
 
     @Override
@@ -32,27 +18,28 @@ public class Controller implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_UP) {
-            upPressed = true;
-        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            downPressed = true;
-        } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            leftPressed = true;
-        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            rightPressed = true;
+        int keyCode = e.getKeyCode();
+
+        if (pressedKeys.containsKey(keyCode)) {
+            pressedKeys.put(keyCode, true);
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_UP) {
-            upPressed = false;
-        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            downPressed = false;
-        } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            leftPressed = false;
-        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            rightPressed = false;
+        int keyCode = e.getKeyCode();
+
+        if (pressedKeys.containsKey(keyCode)) {
+            pressedKeys.put(keyCode, false);
         }
+    }
+
+    public boolean isKeyPressed(int keyCode) {
+        return pressedKeys.containsKey(keyCode)
+                && pressedKeys.get(keyCode);
+    }
+
+    public void unbindKey(int keyCode) {
+        pressedKeys.remove(keyCode);
     }
 }

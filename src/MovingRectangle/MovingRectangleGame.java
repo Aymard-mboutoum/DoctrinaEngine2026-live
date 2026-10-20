@@ -3,17 +3,19 @@ package MovingRectangle;
 import Engine.Canvas;
 import Engine.Controller;
 import Engine.Game;
+import Engine.MovementController;
 
 import java.awt.*;
 
 public class MovingRectangleGame extends Game {
-    private Controller controller;
+    private MovementController controller;
     Player player;
     Npc npc;
 
     @Override
     public void initialize() {
-        controller = new Controller();
+        controller = new MovementController();
+        controller.useWASD();
         addKeyListener(controller);
         player = new Player(controller, getWidth(), getHeight());
         npc = new Npc();
