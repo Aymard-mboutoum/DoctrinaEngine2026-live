@@ -22,7 +22,7 @@ public class Footprint extends StaticActor {
     public void draw(Canvas canvas) {
         Color color = new Color(getRandomValue(),
                 getRandomValue(), getRandomValue());
-        canvas.drawRectangle(x, y, width, height, color);
+        canvas.drawRectangle(this, color);
     }
 
 }
