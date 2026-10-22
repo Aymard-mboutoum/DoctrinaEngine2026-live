@@ -11,7 +11,8 @@ public class Npc extends MovableActor {
     private boolean path3 = false;
     private boolean path4 = false;
 
-    public Npc() {
+    public Npc(int maxWidth, int maxHeight) {
+        super(maxWidth, maxHeight);
         moveTo(400, 200);
         setDimensions(10, 10);
         setSpeed(2);

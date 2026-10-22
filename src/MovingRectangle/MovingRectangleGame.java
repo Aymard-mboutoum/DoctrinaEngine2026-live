@@ -16,7 +16,7 @@ public class MovingRectangleGame extends Game {
         controller.useWASD();
         addKeyListener(controller);
         player = new Player(controller, getWidth(), getHeight());
-        npc = new Npc();
+        npc = new Npc(getWidth(), getHeight());
     }
 
     @Override
