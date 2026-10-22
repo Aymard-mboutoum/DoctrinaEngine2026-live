@@ -7,27 +7,38 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class AmazingFootprintGame extends Game {
-    private GamePad controller;
-    Player player;
+    private GamePad controllerOne;
+    private GamePad controllerTwo;
+    Player playerOne;
+    Player playerTwo;
     ArrayList<Footprint> footprints;
 
     @Override
     public void initialize() {
-        controller = new GamePad();
-        addKeyListener(controller);
-        player = new Player(controller, getWidth(), getHeight());
+        controllerOne = new GamePad();
+        controllerTwo = new GamePad();
+        controllerTwo.useWASD();
+        addKeyListener(controllerOne);
+        addKeyListener(controllerTwo);
+        playerOne = new Player(controllerOne, getWidth(), getHeight());
+        playerTwo = new Player(controllerTwo, getWidth(), getHeight());
         footprints = new ArrayList<>();
     }
 
     @Override
     public void update() {
-        if (controller.isQuitPressed()) {
+        if (controllerOne.isQuitPressed() || controllerOne.isQuitPressed()) {
             stop();
         }
-        player.update();
+        playerOne.update();
+        playerTwo.update();
 
-        if (controller.isMoving()) {
-            footprints.add(player.layFootprint());
+        if (controllerOne.isMoving()) {
+            footprints.add(playerOne.layFootprint());
+        }
+
+        if (controllerTwo.isMoving()) {
+            footprints.add(playerTwo.layFootprint());
         }
     }
 
@@ -37,7 +48,8 @@ public class AmazingFootprintGame extends Game {
         for (Footprint footprint : footprints) {
             footprint.draw(canvas);
         }
-        player.draw(canvas);
+        playerOne.draw(canvas);
+        playerTwo.draw(canvas);
     }
 
     private void drawBackground(Engine.Canvas canvas) {
