@@ -1,7 +1,7 @@
 package Engine;
 
 public abstract class ControllableActor extends MovableActor {
-    private MovementController controller;
+    protected MovementController controller;
 
     public ControllableActor(MovementController controller, int maxWidth, int maxHeight) {
         super(maxWidth, maxHeight);
