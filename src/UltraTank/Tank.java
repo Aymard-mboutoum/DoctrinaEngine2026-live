@@ -32,9 +32,17 @@ public class Tank extends ControllableActor {
 
     @Override
     public void draw(Canvas canvas) {
+        canvas.drawRectangle(this, Color.GREEN);
+        drawCanon(canvas);
+        drawCooldown(canvas);
+    }
+
+    private void drawCooldown(Canvas canvas) {
         int cooldownWidth = cooldown * width / COOLDOWN;
         canvas.drawRectangle(x, y-12, cooldownWidth,2, Color.RED);
-        canvas.drawRectangle(this, Color.GREEN);
+    }
+    
+    private void drawCanon(Canvas canvas) {
         if (getDirection() == Direction.LEFT) {
             canvas.drawRectangle(getX()-5, getY()+(getHeight()/2)-2, 8, 4, Color.GREEN);
         } else if (getDirection() == Direction.RIGHT) {
