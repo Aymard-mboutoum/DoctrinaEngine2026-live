@@ -8,13 +8,12 @@ public class Collision {
     }
 
     public int getAllowedSpeed(Direction direction) {
-        switch(direction) {
-            case UP: return getAllowedUpSpeed();
-            case DOWN: return getAllowedDownSpeed();
-            case LEFT: return getAllowedLeftSpeed();
-            case RIGHT: return getAllowedRightSpeed();
-        }
-        return 0;
+        return switch (direction) {
+            case UP -> getAllowedUpSpeed();
+            case DOWN -> getAllowedDownSpeed();
+            case LEFT -> getAllowedLeftSpeed();
+            case RIGHT -> getAllowedRightSpeed();
+        };
     }
 
     public int getAllowedRightSpeed() {

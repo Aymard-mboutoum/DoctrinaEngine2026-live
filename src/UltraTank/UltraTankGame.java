@@ -40,16 +40,33 @@ public class UltraTankGame extends Game {
         }
 
         ArrayList<Missile> toRemove = new ArrayList<>();
+        ArrayList<StaticActor> destroyedActors = new ArrayList<>();
         for(Missile missile : missiles) {
             missile.update();
+            for(Brick brick : bricks) {
+                if (missile.hitBoxIntersectsWith(brick)) {
+                    destroyedActors.add(missile);
+                    destroyedActors.add(brick);
+                }
+            }
             if (missile.getX() > getWidth() || missile.getY() > getHeight()) {
                 toRemove.add(missile);
             }
         }
 
+        for(StaticActor actor: destroyedActors) {
+            if (actor instanceof Brick) {
+                bricks.remove(actor);
+            } else if (actor instanceof Missile) {
+                missiles.remove(actor);
+            }
+        }
+        CollidableRepository.getInstance().unregisterActors(destroyedActors);
+
         for(Missile missile : toRemove) {
             missiles.remove(missile);
         }
+
     }
 
     @Override

@@ -1,8 +1,7 @@
 package UltraTank;
 
+import Engine.*;
 import Engine.Canvas;
-import Engine.Direction;
-import Engine.MovableActor;
 
 import java.awt.*;
 
@@ -15,6 +14,7 @@ public class Missile extends MovableActor {
         setSpeed(5);
         setDirection(tank.getDirection());
         initialize();
+        CollidableRepository.getInstance().registerActor(this);
     }
 
     private void initialize() {

@@ -13,7 +13,7 @@ public class Tank extends ControllableActor {
     public Tank(UltraTankGamePad controller, int maxWidth, int maxHeight) {
         super(controller, maxWidth, maxHeight);
         setDimensions(30, 40);
-        setSpeed(3);
+        setSpeed(2);
         cooldown = 0;
     }
 
