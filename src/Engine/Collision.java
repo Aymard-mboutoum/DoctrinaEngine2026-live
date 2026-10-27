@@ -18,50 +18,38 @@ public class Collision {
     }
 
     public int getAllowedRightSpeed() {
-        int allowedSpeed = actor.getSpeed();
-
-        for (StaticActor other : CollidableRepository.getInstance()) {
-            if (actor.hitBoxIntersectsWith(other)) {
-                int distance = other.x - (actor.x + actor.width);
-                allowedSpeed = Math.min(allowedSpeed, distance);
-            }
-        }
-        return allowedSpeed;
+        return distance(other ->
+                other.x - (actor.x + actor.width));
     }
 
     public int getAllowedDownSpeed() {
-        int allowedSpeed = actor.getSpeed();
-
-        for (StaticActor other : CollidableRepository.getInstance()) {
-            if (actor.hitBoxIntersectsWith(other)) {
-                int distance = other.y - (actor.y + actor.height);
-                allowedSpeed = Math.min(allowedSpeed, distance);
-            }
-        }
-        return allowedSpeed;
+        return distance(other ->
+                other.y - (actor.y + actor.height));
     }
 
     public int getAllowedLeftSpeed() {
+        return distance(other ->
+                actor.x - (other.x + other.width));
+    }
+
+    public int getAllowedUpSpeed() {
+        return distance(other ->
+                actor.y - (other.y + other.height));
+    }
+
+    private int distance(DistanceCalculator distanceCalculator) {
         int allowedSpeed = actor.getSpeed();
 
         for (StaticActor other : CollidableRepository.getInstance()) {
             if (actor.hitBoxIntersectsWith(other)) {
-                int distance = actor.x - (other.x + other.width);
+                int distance = distanceCalculator.calculatesWith(other);
                 allowedSpeed = Math.min(allowedSpeed, distance);
             }
         }
         return allowedSpeed;
     }
 
-    public int getAllowedUpSpeed() {
-        int allowedSpeed = actor.getSpeed();
-
-        for (StaticActor other : CollidableRepository.getInstance()) {
-            if (actor.hitBoxIntersectsWith(other)) {
-                int distance = actor.y - (other.y + other.height);
-                allowedSpeed = Math.min(allowedSpeed, distance);
-            }
-        }
-        return allowedSpeed;
+    private interface DistanceCalculator {
+        int calculatesWith(StaticActor other);
     }
 }
