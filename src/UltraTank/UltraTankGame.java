@@ -11,12 +11,23 @@ public class UltraTankGame extends Game {
     Tank tank;
     UltraTankGamePad gamePad = new UltraTankGamePad();
     ArrayList<Missile> missiles;
+    ArrayList<Brick> bricks;
 
     @Override
     public void initialize() {
         tank = new Tank(gamePad, getWidth(), getHeight());
         addKeyListener(gamePad);
         missiles = new ArrayList<Missile>();
+        bricks = new ArrayList<>();
+        initializeBricks();
+    }
+
+    private void initializeBricks() {
+        bricks.add(new Brick(500, 100));
+        bricks.add(new Brick(500, 116));
+        bricks.add(new Brick(500, 132));
+        bricks.add(new Brick(484, 148));
+        bricks.add(new Brick(500, 164));
     }
 
     @Override
@@ -47,6 +58,9 @@ public class UltraTankGame extends Game {
         tank.draw(canvas);
         for(Missile missile : missiles) {
             missile.draw(canvas);
+        }
+        for(Brick brick : bricks) {
+            brick.draw(canvas);
         }
     }
 }
