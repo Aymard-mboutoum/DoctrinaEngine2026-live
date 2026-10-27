@@ -1,8 +1,7 @@
 package UltraTank;
 
+import Engine.*;
 import Engine.Canvas;
-import Engine.Game;
-import Engine.GamePad;
 
 import java.awt.*;
 import java.util.ArrayList;

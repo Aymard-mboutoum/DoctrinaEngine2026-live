@@ -7,7 +7,7 @@ import java.util.List;
 public class CollidableRepository implements Iterable<StaticActor> {
     private static CollidableRepository instance;
     private ArrayList<StaticActor> registeredActors;
-    
+
     private CollidableRepository() {
         registeredActors = new ArrayList<>();
     }

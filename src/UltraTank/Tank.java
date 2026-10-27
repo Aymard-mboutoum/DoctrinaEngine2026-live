@@ -13,7 +13,7 @@ public class Tank extends ControllableActor {
     public Tank(UltraTankGamePad controller, int maxWidth, int maxHeight) {
         super(controller, maxWidth, maxHeight);
         setDimensions(30, 40);
-        setSpeed(2);
+        setSpeed(3);
         cooldown = 0;
     }
 
@@ -35,6 +35,11 @@ public class Tank extends ControllableActor {
         canvas.drawRectangle(this, Color.GREEN);
         drawCanon(canvas);
         drawCooldown(canvas);
+        drawHitBox(canvas);
+    }
+
+    private void drawHitBox(Canvas canvas) {
+        canvas.drawRectangle(getHitBox(), Color.RED);
     }
 
     private void drawCooldown(Canvas canvas) {

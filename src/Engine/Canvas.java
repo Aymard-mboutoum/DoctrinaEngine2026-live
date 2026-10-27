@@ -19,6 +19,11 @@ public class Canvas {
         graphics.fillRect(actor.x, actor.y, actor.width, actor.height);
     }
 
+    public void drawRectangle(Rectangle rectangle, Paint paint) {
+        graphics.setPaint(paint);
+        graphics.fillRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+    }
+
     public void drawCircle(int x, int y, int diameter, Paint paint) {
         graphics.setPaint(paint);
         graphics.fillOval(x, y, diameter, diameter);

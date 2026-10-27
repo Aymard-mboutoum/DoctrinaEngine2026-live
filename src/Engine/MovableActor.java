@@ -1,5 +1,7 @@
 package Engine;
 
+import java.awt.*;
+
 public abstract class MovableActor extends StaticActor {
     private int speed = 3;
     private final int maxWidth;
@@ -20,6 +22,38 @@ public abstract class MovableActor extends StaticActor {
 
     public void setSpeed(int speed) {
         this.speed = speed;
+    }
+
+    public Rectangle getHitBox() {
+        return switch (direction) {
+            case UP -> getUpperHitBox();
+            case DOWN -> getLowerHitBox();
+            case LEFT -> getLeftHitBox();
+            case RIGHT -> getRightHitBox();
+        };
+    }
+
+    public Rectangle getUpperHitBox() {
+        return new Rectangle(x, y - speed, width, speed);
+    }
+
+    public Rectangle getLowerHitBox() {
+        return new Rectangle(x, y + height, width, speed);
+    }
+
+    public Rectangle getLeftHitBox() {
+        return new Rectangle(x - speed, y, speed, height);
+    }
+
+    public Rectangle getRightHitBox() {
+        return new Rectangle(x + width, y, speed, height);
+    }
+
+    public boolean hitBoxIntersectsWith(StaticActor actor) {
+        if (actor == null) {
+            return false;
+        }
+        return getHitBox().intersects(actor.getBounds());
     }
 
     public void move() {
